@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanakku Practice</title>
+  <link rel="stylesheet" href="index.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="main-wrapper">
+    <div class="question-container">
+      <div>
+        <div class="question-section-text">Previous Answer: <span class="dynamic-field" id="previous-answer"></span></div>
+      </div>
+      <div>
+        <h3>How many matras after samam would you start :</h3>
+      </div>
+      <div class="question-section-text">The pattern <span class="dynamic-field" id="pattern"></span></div>
+      <div class="question-section-text">repeated <span id="repeats" class="dynamic-field"></span> time(s)</div>
+      <div class="question-section-text">in <span id="talam" class="dynamic-field"></span> talam (<span id="talam-beat-count" class="dynamic-field"></span> beats)</div>
+      <div class="question-section-text">in <span id="nadai" class="dynamic-field"></span> nadai (<span id="nadai-subdivisions-count" class="dynamic-field"></span> notes per beat)</div>
+      <div>
+        <input type="number" id="answer" step="1" placeholder="Resulting offset from samam" onkeyup="check();">
+      </div>
+    </div>
+
+    <div class="difficulty-container" id="difficulty-selector">
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
