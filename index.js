@@ -113,7 +113,7 @@ function updateUI() {
     document.getElementById("nadai").innerText = nadai.name;
     document.getElementById("nadai-subdivisions-count").innerText = nadai.subdivisions;
     document.getElementById("nadai-subdivisions-count").innerText = nadai.subdivisions;
-    document.getElementById('previous-answer').innerText = previousAnswer;
+    document.getElementById('previous-answer').innerText = previousAnswer ?? "";
 }
 
 function generate() {
@@ -139,7 +139,7 @@ function check() {
     const sum = pattern.reduce((accumulator, currentValue) => accumulator + currentValue, 0) * repeatCount;
     const matras = tala.length * nadai.subdivisions;
     if (parseInt(answer.value) % (matras - (sum % matras)) == 0) {
-        previousAnswer = answer.value;
+        previousAnswer = answer.value;  
         generate();
     } else {
         answer.className = "wrong-answer";
