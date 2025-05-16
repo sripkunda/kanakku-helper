@@ -3,7 +3,7 @@ let repeatCount;
 let tala;
 let nadai;
 let currentDifficulty;
-
+let previousAnswer;
 const nadais = {
     one: { name: "first speed chatusra", subdivisions: 1 },
     two: { name: "second speed chatusra", subdivisions: 2 },
@@ -82,7 +82,7 @@ const difficulties = {
 
 function setup() { 
     const defaultName = Object.keys(difficulties)[0];
-    currentDifficulty = difficulties[defaultName]
+    currentDifficulty = difficulties[defaultName];
     generate();
     for (const difficulty in difficulties) {
         const selectorDiv = document.getElementById("difficulty-selector");
@@ -112,6 +112,8 @@ function updateUI() {
     document.getElementById("talam-beat-count").innerText = tala.length;
     document.getElementById("nadai").innerText = nadai.name;
     document.getElementById("nadai-subdivisions-count").innerText = nadai.subdivisions;
+    document.getElementById("nadai-subdivisions-count").innerText = nadai.subdivisions;
+    document.getElementById('previous-answer').innerText = previousAnswer;
 }
 
 function generate() {
@@ -136,8 +138,8 @@ function check() {
     const answer = document.getElementById("answer");
     const sum = pattern.reduce((accumulator, currentValue) => accumulator + currentValue, 0) * repeatCount;
     const matras = tala.length * nadai.subdivisions;
-    console.log(answer.value);
     if (parseInt(answer.value) % (matras - (sum % matras)) == 0) {
+        previousAnswer = answer.value;
         generate();
     } else {
         answer.className = "wrong-answer";
