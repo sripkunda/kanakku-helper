@@ -82,6 +82,10 @@ button:active, .difficulty-btn:active {
     gap: 2rem;
 }
 
+.timestamp {
+  font-family: monospace;
+}
+
 .difficulty-container {
     background: #2a2a2a;
     border-radius: 12px;

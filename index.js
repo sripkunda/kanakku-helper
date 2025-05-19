@@ -4,6 +4,8 @@ let tala;
 let nadai;
 let currentDifficulty;
 let previousAnswer;
+let currentTimeMs = 0;
+let lastTimestamp;
 const nadais = {
     one: { name: "first speed chatusra", subdivisions: 1 },
     two: { name: "second speed chatusra", subdivisions: 2 },
@@ -80,6 +82,14 @@ const difficulties = {
     }
 }
 
+function formatTime(ms) {
+  const minutes = String(Math.floor(ms / 60000)).padStart(2, '0');
+  const seconds = String(Math.floor((ms % 60000) / 1000)).padStart(2, '0');
+  const milliseconds = String((ms % 1000).toFixed(0)).padStart(3, '0');
+
+  return `${minutes}:${seconds}:${milliseconds}`;
+}
+
 function setup() { 
     const defaultName = Object.keys(difficulties)[0];
     currentDifficulty = difficulties[defaultName];
@@ -94,9 +104,16 @@ function setup() {
             btn.classList.add('selected');
             currentDifficulty = difficulties[btn.getAttribute('data-difficulty')];
             generate();
+        });
     });
-});
-
+    
+    const updateTimer = (timestamp) => {
+        lastTimestamp = timestamp;
+        const time = timestamp - currentTimeMs;
+        document.getElementById('time-spent').innerText = formatTime(time);
+        requestAnimationFrame(updateTimer);
+    }
+    requestAnimationFrame(updateTimer);
 }
 
 function clearAnswer() { 
@@ -114,6 +131,10 @@ function updateUI() {
     document.getElementById("nadai-subdivisions-count").innerText = nadai.subdivisions;
     document.getElementById("nadai-subdivisions-count").innerText = nadai.subdivisions;
     document.getElementById('previous-answer').innerText = previousAnswer ?? "";
+    if (lastTimestamp) {
+        currentTimeMs = lastTimestamp;
+        document.getElementById('previous-time-spent').innerText = formatTime(lastTimestamp);
+    }
 }
 
 function generate() {
